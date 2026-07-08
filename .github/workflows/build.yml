@@ -1,0 +1,22 @@
+name: Build
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Theos
+        run: |
+          brew install ldid xz
+          git clone --depth=1 https://github.com/theos/theos.git $HOME/theos
+          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
+          echo "$HOME/theos/bin" >> $GITHUB_ENV
+      - name: Build
+        run: |
+          ln -sf $THEOS theos
+          make package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deb
+          path: packages/*.deb
