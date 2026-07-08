@@ -1,0 +1,15 @@
+name: Build
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pspectre/theos:latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ln -sf $(which theos) ./theos || ln -s /opt/theos ./theos
+      - run: make package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deb
+          path: packages/*.deb
