@@ -1,0 +1,9 @@
+Package: com.quickclipboard.pref
+Name: QuickClipboardPref
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: iOS 越狱剪贴板插件设置面板
+Maintainer: QuickClipboard
+Author: QuickClipboard
+Section: Tweaks
+Depends: mobilesubstrate (>= 0.9.5000)
